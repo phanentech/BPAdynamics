@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BPA Dynamics – Business Automation Solutions</title>
+<meta name="description" content="Cloud-based business management systems for Nigerian SMEs. Shortlet, Clinic, Restaurant, School, Logistics, Gym and more." />
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<!-- AOS Animate on Scroll -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- ============================================================
+  ✏️  YOUR DETAILS — edit ONLY this block, then you are done.
+     ============================================================ -->
+<script>
+var BPA = {
+  // WhatsApp number: country code + number, no spaces or +
+  whatsapp:   "2348108076212",
+
+  // Your business email
+  email:      "bpadynamics@gmail.com",
+
+  // Formspree: sign up at formspree.io, create a form, paste endpoint here
+  formspree:  "https://formspree.io/f/xkoywell",
+
+  // Your city / country
+  location:   "Lagos, Nigeria",
+
+  // Social media (set to "#" if you don't have one yet)
+  twitter:    "https://twitter.com/bpadynamics",
+  linkedin:   "https://www.linkedin.com/in/bpa-dynamics-27a967363/",
+  instagram:  "https://www.instagram.com/bpadynamics/",
+  facebook:   "https://www.facebook.com/profile.php?id=61575790451937",
+
+  // Pricing display (naira, no symbol)
+  priceBasic:    "25,000",
+  priceBusiness: "65,000"
+};
+</script>
+<!-- ============================================================ -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --ink:#0a0f1e;--ink-soft:#1c2340;--surface:#f4f6fb;--white:#fff;
+  --accent:#2563eb;--glow:#3b82f6;--teal:#06b6d4;--violet:#7c3aed;
+  --gold:#f59e0b;--text:#1e293b;--muted:#64748b;
+  --border:rgba(100,116,139,.15);
+  --grad:linear-gradient(135deg,#2563eb 0%,#7c3aed 50%,#06b6d4 100%);
+  --r:1rem;--rl:1.5rem;
+  --sh:0 4px 24px rgba(37,99,235,.1);
+  --shl:0 20px 60px rgba(37,99,235,.18);
+  --fh:'Syne',sans-serif;--fb:'DM Sans',sans-serif
+}
+body{font-family:var(--fb);background:var(--white);color:var(--text);overflow-x:hidden;line-height:1.65}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+
+/* ---- Utilities ---- */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.section{padding:6rem 0}
+.stag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--fb);font-size:.75rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);background:rgba(37,99,235,.08);
+  border:1px solid rgba(37,99,235,.2);border-radius:99px;
+  padding:.35rem .9rem;margin-bottom:1rem
+}
+.stag i{font-size:.7rem}
+.stag-d{color:var(--glow);background:rgba(37,99,235,.15);border-color:rgba(37,99,235,.25)}
+h2.stitle{font-family:var(--fh);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--ink);line-height:1.15;margin-bottom:1rem}
+h2.stitle-w{color:#fff}
+.ssub{font-size:1.05rem;color:var(--muted);max-width:580px;line-height:1.7}
+.ssub-d{color:rgba(255,255,255,.55)}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--fb);font-weight:500;font-size:.95rem;
+  padding:.75rem 1.75rem;border-radius:99px;cursor:pointer;
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);
+  text-decoration:none;border:none;white-space:nowrap
+}
+.btn-p{background:var(--accent);color:#fff;box-shadow:0 6px 24px rgba(37,99,235,.35)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,99,235,.45);background:#1d4ed8}
+.btn-g{background:rgba(255,255,255,.12);color:#fff;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2)}
+.btn-g:hover{background:rgba(255,255,255,.22);transform:translateY(-2px)}
+
+/* ---- NAV ---- */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;transition:all .3s ease}
+nav.scrolled{background:rgba(10,15,30,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08);box-shadow:0 4px 30px rgba(0,0,0,.3)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2rem;max-width:1200px;margin:0 auto}
+.logo{font-family:var(--fh);font-weight:800;font-size:1.3rem;color:#fff;text-decoration:none;display:flex;align-items:center;gap:.6rem}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;flex-shrink:0}
+.logo span{letter-spacing:-.02em}
+.logo em{font-style:normal;color:var(--glow)}
+.nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.9rem;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--glow);transform:scaleX(0);transition:transform .25s ease;transform-origin:right}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{display:flex;align-items:center;gap:.75rem}
+.nav-ghost{background:transparent;color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.2);border-radius:99px;padding:.55rem 1.2rem;font-size:.85rem;font-family:var(--fb);text-decoration:none;transition:all .25s}
+.nav-ghost:hover{background:rgba(255,255,255,.08)}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;border:none;background:none}
+.ham span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mob-menu{display:none;position:fixed;top:72px;left:0;right:0;background:rgba(10,15,30,.97);backdrop-filter:blur(20px);padding:1.5rem 2rem 2rem;border-bottom:1px solid rgba(255,255,255,.08);flex-direction:column;gap:1.2rem}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.8);text-decoration:none;font-size:1rem;padding:.5rem 0}
+
+/* ---- HERO ---- */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;background:var(--ink);overflow:hidden;padding-top:80px}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 80% at 20% 20%,rgba(37,99,235,.35) 0%,transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 80%,rgba(124,58,237,.3) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 60% 10%,rgba(6,182,212,.2) 0%,transparent 60%);
+  animation:meshMove 8s ease-in-out infinite alternate
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
+}
+@keyframes meshMove{from{transform:scale(1) rotate(0deg)}to{transform:scale(1.08) rotate(2deg)}}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;animation:floatOrb 6s ease-in-out infinite alternate}
+.o1{width:400px;height:400px;background:rgba(37,99,235,.4);top:-100px;right:-100px;animation-duration:7s}
+.o2{width:300px;height:300px;background:rgba(124,58,237,.35);bottom:-50px;left:30%;animation-duration:9s;animation-delay:-3s}
+.o3{width:200px;height:200px;background:rgba(6,182,212,.3);top:40%;left:-80px;animation-duration:11s;animation-delay:-5s}
+@keyframes floatOrb{from{transform:translateY(0) scale(1)}to{transform:translateY(-40px) scale(1.1)}}
+.hero-content{position:relative;z-index:2;width:100%}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);
+  color:var(--glow);font-size:.8rem;font-weight:500;letter-spacing:.08em;
+  padding:.35rem .9rem;border-radius:99px;margin-bottom:1.5rem;
+  animation:fadeInDown .6s ease both
+}
+.hero-badge i{font-size:.65rem;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{font-family:var(--fh);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:1.25rem;animation:fadeUp .7s .1s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:rgba(255,255,255,.65);font-size:1.1rem;line-height:1.7;margin-bottom:2rem;animation:fadeUp .7s .2s ease both}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .7s .3s ease both}
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;animation:fadeUp .7s .4s ease both;flex-wrap:wrap}
+.hstat strong{display:block;font-family:var(--fh);font-size:1.8rem;font-weight:800;color:#fff;line-height:1}
+.hstat span{font-size:.8rem;color:rgba(255,255,255,.5)}
+/* Mockup */
+.hero-mock{position:relative;animation:fadeRight .8s .3s ease both}
+@keyframes fadeRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+.mw{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--rl);overflow:hidden;backdrop-filter:blur(10px);box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06)}
+.mbar{background:rgba(255,255,255,.06);padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.dot{width:10px;height:10px;border-radius:50%}
+.dr{background:#ff5f57}.dy{background:#febc2e}.dg{background:#28c840}
+.murl{flex:1;background:rgba(255,255,255,.06);border-radius:99px;padding:.3rem 1rem;text-align:center;font-size:.7rem;color:rgba(255,255,255,.35);margin:0 .5rem}
+.mbody{padding:1.25rem}
+.dh{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.dt{font-family:var(--fh);font-size:.85rem;font-weight:700;color:#fff}
+.dd{font-size:.65rem;color:rgba(255,255,255,.4)}
+.dcards{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem}
+.dc{padding:.65rem;border-radius:.6rem;font-size:.65rem;display:flex;flex-direction:column;gap:.2rem}
+.dc span{color:rgba(255,255,255,.5)}
+.dc strong{font-family:var(--fh);font-size:1.1rem;color:#fff;font-weight:700}
+.up{color:#4ade80;font-size:.6rem}.dn{color:#f87171;font-size:.6rem}
+.dc1{background:rgba(37,99,235,.25);border:1px solid rgba(37,99,235,.3)}
+.dc2{background:rgba(124,58,237,.25);border:1px solid rgba(124,58,237,.3)}
+.dc3{background:rgba(6,182,212,.25);border:1px solid rgba(6,182,212,.3)}
+.dc4{background:rgba(245,158,11,.25);border:1px solid rgba(245,158,11,.3)}
+.dcharts{display:grid;grid-template-columns:1.6fr 1fr;gap:.75rem}
+.dcbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:.75rem;padding:.75rem}
+.dcl{font-size:.6rem;color:rgba(255,255,255,.4);margin-bottom:.4rem}
+canvas{max-height:100px}
+.hping{position:absolute;bottom:-10px;right:-10px;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:.75rem;padding:.65rem .85rem;display:flex;align-items:center;gap:.6rem}
+.pdot{width:8px;height:8px;border-radius:50%;background:#4ade80;position:relative}
+.pdot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:rgba(74,222,128,.3);animation:ping 1.5s ease-in-out infinite}
+@keyframes ping{0%{transform:scale(.8);opacity:1}100%{transform:scale(2);opacity:0}}
+.ptxt{font-size:.65rem;color:rgba(255,255,255,.7);line-height:1.3}
+.ptxt strong{display:block;color:#fff;font-weight:600}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.4);font-size:.7rem;animation:scrollBounce 2s ease-in-out infinite}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ---- ABOUT ---- */
+.about{background:var(--surface)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.bcard{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:all .3s}
+.bcard:hover{transform:translateY(-4px);box-shadow:var(--shl);border-color:rgba(37,99,235,.2)}
+.bicon{width:44px;height:44px;border-radius:.75rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.75rem}
+.bcard h4{font-family:var(--fh);font-size:.95rem;font-weight:700;margin-bottom:.3rem;color:var(--ink)}
+.bcard p{font-size:.82rem;color:var(--muted);line-height:1.5}
+.awrap{background:var(--grad);border-radius:var(--rl);padding:3px;box-shadow:var(--shl)}
+.ainner{background:var(--ink-soft);border-radius:calc(var(--rl) - 3px);padding:2rem;display:flex;flex-direction:column;gap:1rem}
+.sbar{display:flex;flex-direction:column;gap:.4rem}
+.sbar-lbl{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.6)}
+.sbar-track{height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.sbar-fill{height:100%;border-radius:99px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.34,1.2,.64,1)}
+.acrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+.ac{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:.75rem;padding:1rem;text-align:center}
+.ac strong{display:block;font-family:var(--fh);font-size:1.6rem;font-weight:800;color:#fff;line-height:1}
+.ac span{font-size:.72rem;color:rgba(255,255,255,.5)}
+
+/* ---- PRODUCTS ---- */
+.products{background:var(--white)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:3rem}
+.pcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--rl);padding:1.75rem;transition:all .35s cubic-bezier(.34,1.2,.64,1);position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:0;transition:opacity .3s}
+.pcard:hover{transform:translateY(-6px);box-shadow:var(--shl);border-color:transparent}
+.pcard:hover::before{opacity:.05}
+.pcard:hover .picon{transform:scale(1.1) rotate(-5deg)}
+.pcard:hover .pbtn{background:var(--accent);color:#fff;border-color:var(--accent)}
+.picon{width:52px;height:52px;border-radius:.9rem;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem;transition:transform .35s cubic-bezier(.34,1.56,.64,1);position:relative;z-index:1}
+.pcard h3{font-family:var(--fh);font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:.5rem;position:relative;z-index:1}
+.pcard p{font-size:.85rem;color:var(--muted);line-height:1.55;margin-bottom:1.25rem;position:relative;z-index:1}
+.pbtn{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:500;color:var(--accent);background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.15);padding:.4rem .9rem;border-radius:99px;transition:all .25s;font-family:var(--fb);text-decoration:none;position:relative;z-index:1}
+
+/* ---- FEATURES ---- */
+.features{background:var(--ink);position:relative;overflow:hidden}
+.features::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 0% 50%,rgba(37,99,235,.2) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 100% 50%,rgba(124,58,237,.15) 0%,transparent 60%)}
+.features .container{position:relative}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-top:3rem}
+.fcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:1.75rem;transition:all .35s;position:relative;overflow:hidden}
+.fcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.fcard:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);transform:translateY(-4px)}
+.fcard:hover::before{transform:scaleX(1)}
+.ficon{width:48px;height:48px;border-radius:.75rem;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;margin-bottom:1.1rem}
+.fcard h3{font-family:var(--fh);font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.fcard p{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.55}
+.cstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);overflow:hidden;margin-top:4rem}
+.citem{background:rgba(255,255,255,.03);padding:2rem;text-align:center}
+.citem strong{display:block;font-family:var(--fh);font-size:2.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.citem span{font-size:.8rem;color:rgba(255,255,255,.45);margin-top:.4rem;display:block}
+
+/* ---- DASHBOARD ---- */
+.dashsec{background:var(--surface)}
+.dash-inner{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:center}
+.dwin{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;box-shadow:var(--shl)}
+.dwin-bar{background:var(--ink);padding:.65rem 1rem;display:flex;align-items:center;gap:.5rem}
+.dwin-body{padding:1.25rem}
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem}
+.kpi{background:var(--surface);border-radius:.6rem;padding:.9rem;border:1px solid var(--border)}
+.kpi .kl{font-size:.65rem;color:var(--muted);margin-bottom:.3rem}
+.kpi .kv{font-family:var(--fh);font-size:1.2rem;font-weight:800;color:var(--ink)}
+.kpi .kb{font-size:.6rem;padding:.15rem .45rem;border-radius:99px;margin-top:.25rem;display:inline-block}
+.kg{background:rgba(74,222,128,.15);color:#16a34a}
+.kb2{background:rgba(37,99,235,.12);color:var(--accent)}
+.kam{background:rgba(245,158,11,.15);color:#b45309}
+.chart-row{display:grid;grid-template-columns:1.8fr 1fr;gap:.75rem}
+.cbox{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.75rem}
+.cl{font-size:.65rem;color:var(--muted);margin-bottom:.4rem}
+.tmini{width:100%;font-size:.65rem;border-collapse:collapse}
+.tmini th{color:var(--muted);font-weight:500;text-align:left;padding:.2rem 0;border-bottom:1px solid var(--border)}
+.tmini td{padding:.3rem 0;color:var(--text)}
+.sdot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:.3rem}
+.sg{background:#4ade80}.sb{background:var(--accent)}.sa{background:var(--gold)}
+
+/* ---- HOW ---- */
+.how{background:var(--white)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;position:relative}
+.steps::before{content:'';position:absolute;top:32px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,var(--accent),var(--violet),var(--teal))}
+.step{text-align:center}
+.snum{width:64px;height:64px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:1.3rem;font-weight:800;color:#fff;margin:0 auto 1.25rem;position:relative;z-index:1;box-shadow:0 8px 24px rgba(37,99,235,.35);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.step:hover .snum{transform:scale(1.1)}
+.step h3{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.step p{font-size:.85rem;color:var(--muted);line-height:1.55}
+
+/* ---- TESTIMONIALS ---- */
+.testimonials{background:var(--surface)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-top:3rem}
+.tcard{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem;transition:all .3s}
+.tcard:hover{transform:translateY(-4px);box-shadow:var(--shl)}
+.stars{color:var(--gold);font-size:.9rem;margin-bottom:.75rem}
+.tq{font-size:.9rem;color:var(--text);line-height:1.65;margin-bottom:1.25rem;font-style:italic}
+.tauthor{display:flex;align-items:center;gap:.75rem}
+.tav{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-weight:800;font-size:.85rem;color:#fff;flex-shrink:0}
+.tname{font-family:var(--fh);font-size:.9rem;font-weight:700;color:var(--ink)}
+.trole{font-size:.75rem;color:var(--muted)}
+
+/* ---- PRICING ---- */
+.pricing{background:var(--white)}
+.pr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.pr-card{border-radius:var(--rl);padding:2rem;border:1.5px solid var(--border);transition:all .35s;position:relative;overflow:hidden}
+.pr-card:hover{transform:translateY(-6px);box-shadow:var(--shl)}
+.pr-card.feat{background:var(--ink);border-color:transparent;box-shadow:var(--shl),0 0 0 1px rgba(37,99,235,.3)}
+.pr-badge{position:absolute;top:1.25rem;right:1.25rem;background:var(--grad);color:#fff;font-size:.65rem;font-weight:600;padding:.25rem .7rem;border-radius:99px}
+.pr-plan{font-family:var(--fh);font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;color:var(--accent)}
+.feat .pr-plan{color:var(--glow)}
+.pr-price{display:flex;align-items:flex-end;gap:.25rem;margin-bottom:1.5rem}
+.pr-amt{font-family:var(--fh);font-size:2.8rem;font-weight:800;color:var(--ink);line-height:1}
+.feat .pr-amt{color:#fff}
+.pr-cur{font-size:1.1rem;color:var(--muted);align-self:flex-start;padding-top:.4rem}
+.feat .pr-cur{color:rgba(255,255,255,.5)}
+.pr-per{font-size:.8rem;color:var(--muted);margin-bottom:.3rem}
+.feat .pr-per{color:rgba(255,255,255,.4)}
+.pr-div{height:1px;background:var(--border);margin-bottom:1.5rem}
+.feat .pr-div{background:rgba(255,255,255,.1)}
+.pr-feats{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.75rem}
+.pr-feats li{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:var(--text)}
+.feat .pr-feats li{color:rgba(255,255,255,.75)}
+.pr-feats li i{color:var(--accent);font-size:.8rem;flex-shrink:0}
+.feat .pr-feats li i{color:var(--teal)}
+.pr-feats li.dis{color:var(--muted);text-decoration:line-through;opacity:.5}
+.pr-btn{display:block;text-align:center;width:100%;padding:.85rem;border-radius:99px;font-weight:500;font-size:.9rem;font-family:var(--fb);cursor:pointer;transition:all .28s;text-decoration:none;border:none}
+.pr-btn.sol{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.3)}
+.pr-btn.sol:hover{background:#1d4ed8;transform:translateY(-2px)}
+.pr-btn.out{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
+.pr-btn.out:hover{background:var(--ink);color:#fff}
+.pr-btn.grd{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(37,99,235,.4)}
+.pr-btn.grd:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,99,235,.5)}
+
+/* ---- CONTACT ---- */
+.contact{background:var(--ink);position:relative;overflow:hidden}
+.contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(37,99,235,.2) 0%,transparent 60%)}
+.con-inner{display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;align-items:start;position:relative}
+.cinfo{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.75rem}
+.citem{display:flex;align-items:center;gap:1rem}
+.ciicon{width:44px;height:44px;border-radius:.75rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--glow);flex-shrink:0}
+.citem span{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.5}
+.citem strong{display:block;color:rgba(255,255,255,.85);font-weight:500;font-size:.9rem}
+.wa-btn{display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.9rem 1.75rem;border-radius:99px;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.35);transition:all .28s;margin-top:.5rem}
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.45);background:#1db954}
+.cform-wrap{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--rl);padding:2rem;backdrop-filter:blur(10px)}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.cgroup{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.cgroup label{font-size:.78rem;color:rgba(255,255,255,.5);font-weight:500;letter-spacing:.04em}
+.cgroup input,.cgroup select,.cgroup textarea{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:.6rem;padding:.75rem 1rem;color:rgba(255,255,255,.85);font-family:var(--fb);font-size:.9rem;transition:border-color .25s;outline:none;width:100%}
+.cgroup input::placeholder,.cgroup textarea::placeholder{color:rgba(255,255,255,.25)}
+.cgroup input:focus,.cgroup select:focus,.cgroup textarea:focus{border-color:rgba(37,99,235,.6);background:rgba(255,255,255,.08)}
+.cgroup textarea{resize:vertical;min-height:110px}
+.cgroup select option{background:#1c2340;color:#fff}
+.csub{width:100%;padding:.9rem;border-radius:99px;background:var(--grad);color:#fff;font-family:var(--fb);font-size:1rem;font-weight:600;border:none;cursor:pointer;transition:all .3s;box-shadow:0 6px 24px rgba(37,99,235,.35);display:flex;align-items:center;justify-content:center;gap:.6rem}
+.csub:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,99,235,.45)}
+.csub:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.cerr{display:none;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:.6rem;padding:.75rem 1rem;margin-bottom:1rem;font-size:.85rem;color:#fca5a5}
+.csuccess{display:none;text-align:center;padding:2rem;color:rgba(255,255,255,.8)}
+.csuccess i{font-size:3rem;color:#4ade80;margin-bottom:1rem;display:block}
+
+/* ---- FOOTER ---- */
+footer{background:#050811;border-top:1px solid rgba(255,255,255,.05);padding:4rem 0 2rem}
+.finner{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.fbrand p{color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.65;margin-top:.75rem;max-width:260px}
+.fcol h4{font-family:var(--fh);font-weight:700;color:rgba(255,255,255,.7);font-size:.85rem;margin-bottom:1rem;letter-spacing:.05em}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.flinks a{color:rgba(255,255,255,.35);font-size:.82rem;text-decoration:none;transition:color .2s}
+.flinks a:hover{color:rgba(255,255,255,.7)}
+.fbot{border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between}
+.fbot p{font-size:.78rem;color:rgba(255,255,255,.25)}
+.socials{display:flex;gap:.75rem}
+.soc{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.8rem;text-decoration:none;transition:all .25s}
+.soc:hover{background:var(--accent);border-color:var(--accent);color:#fff;transform:translateY(-2px)}
+
+/* Back to top */
+#btt{position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,99,235,.4);transition:all .3s;opacity:0;transform:translateY(20px)}
+#btt.show{opacity:1;transform:translateY(0)}
+#btt:hover{background:#1d4ed8;transform:translateY(-3px)}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-mock{display:none}
+  .about-inner{grid-template-columns:1fr}
+  .about-visual{order:-1}
+  .dash-inner{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .steps::before{display:none}
+  .pr-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+  .con-inner{grid-template-columns:1fr;gap:2.5rem}
+  .finner{grid-template-columns:1fr 1fr}
+  .cstrip{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .ham{display:flex}
+  .steps{grid-template-columns:1fr 1fr}
+  .finner{grid-template-columns:1fr;gap:2rem}
+  .fbot{flex-direction:column;gap:1rem;text-align:center}
+  .crow{grid-template-columns:1fr}
+  .dcards{grid-template-columns:repeat(2,1fr)}
+  .dcharts{grid-template-columns:1fr}
+  .kpi-row{grid-template-columns:repeat(3,1fr)}
+  .chart-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .bgrid{grid-template-columns:1fr}
+  .cstrip{grid-template-columns:1fr 1fr}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+  .acrow{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#home" class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+      <span>BPA <em>Dynamics</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="nav-ghost">Contact Us</a>
+      <a href="#contact" class="btn btn-p" style="padding:.55rem 1.2rem;font-size:.85rem">Get Demo</a>
+    </div>
+    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="cMenu()">About</a>
+  <a href="#products" onclick="cMenu()">Products</a>
+  <a href="#features" onclick="cMenu()">Features</a>
+  <a href="#pricing" onclick="cMenu()">Pricing</a>
+  <a href="#contact" onclick="cMenu()">Contact</a>
+  <a href="#contact" class="btn btn-p" style="text-align:center;margin-top:.5rem" onclick="cMenu()">Get a Demo</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+  <div class="container hero-content">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge"><i class="fa-solid fa-circle"></i> Now available in Nigeria &amp; Africa</div>
+        <h1>Run Your Business<br/><span class="gt">Smarter &amp; Faster</span><br/>with BPA Dynamics</h1>
+        <p class="hero-sub">All-in-one business automation systems built for SMEs across Nigeria. Digitize operations, get real-time insights, and scale with confidence — no IT team required.</p>
+        <div class="hero-cta">
+          <a id="heroDemoBtn" href="#" class="btn btn-p" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Get a Demo</a>
+          <a href="#products" class="btn btn-g"><i class="fa-solid fa-grid-2"></i> View Products</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><strong>10+</strong><span>Industry systems</span></div>
+          <div class="hstat"><strong>₦0</strong><span>Setup for early adopters</span></div>
+          <div class="hstat"><strong>24/7</strong><span>Real-time dashboards</span></div>
+        </div>
+      </div>
+      <!-- Mock Dashboard -->
+      <div class="hero-mock">
+        <div class="mw">
+          <div class="mbar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><div class="murl">app.bpadynamics.ng/dashboard</div></div>
+          <div class="mbody">
+            <div class="dh"><span class="dt">Business Overview</span><span class="dd">April 2025</span></div>
+            <div class="dcards">
+              <div class="dc dc1"><span>Revenue</span><strong>₦4.2M</strong><span class="up">▲ 18%</span></div>
+              <div class="dc dc2"><span>Bookings</span><strong>284</strong><span class="up">▲ 12%</span></div>
+              <div class="dc dc3"><span>Active</span><strong>167</strong><span class="up">▲ 5%</span></div>
+              <div class="dc dc4"><span>Pending</span><strong>23</strong><span class="dn">▼ 3%</span></div>
+            </div>
+            <div class="dcharts">
+              <div class="dcbox"><div class="dcl">Monthly Revenue Trend</div><canvas id="hLine"></canvas></div>
+              <div class="dcbox"><div class="dcl">Category Split</div><canvas id="hDough"></canvas></div>
+            </div>
+          </div>
+        </div>
+        <div class="hping"><div class="pdot"></div><div class="ptxt"><strong>New booking confirmed</strong>₦45,000 – Shortlet Room A</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind"><i class="fa-solid fa-chevron-down"></i><span>Scroll to explore</span></div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section about" id="about">
+  <div class="container about-inner">
+    <div data-aos="fade-right">
+      <div class="stag"><i class="fa-solid fa-building"></i> Who We Are</div>
+      <h2 class="stitle">Helping Nigerian Businesses Go Fully Digital</h2>
+      <p class="ssub">BPA Dynamics builds cloud-based, affordable management systems tailored for small and medium businesses across Nigeria. Our mission: give every entrepreneur the digital tools previously reserved for large corporations.</p>
+      <div class="bgrid">
+        <div class="bcard" data-aos="zoom-in" data-aos-delay="50"><div class="bicon" style="background:rgba(37,99,235,.1);color:var(--accent)"><i class="fa-solid fa-bolt"></i></div><h4>Smart Automation</h4><p>Automate repetitive tasks, alerts, and reports so you can focus on growth.</p></div>
+        <div class="bcard" data-aos="zoom-in" data-aos-delay="100"><div class="bicon" style="background:rgba(124,58,237,.1);color:#7c3aed"><i class="fa-solid fa-chart-line"></i></div><h4>Real-time Insights</h4><p>Live dashboards that show exactly how your business is performing right now.</p></div>
+        <div class="bcard" data-aos="zoom-in" data-aos-delay="150"><div class="bicon" style="background:rgba(6,182,212,.1);color:var(--teal)"><i class="fa-solid fa-piggy-bank"></i></div><h4>Cost Savings</h4><p>Reduce overhead, prevent losses from manual errors, and pay only for what you use.</p></div>
+        <div class="bcard" data-aos="zoom-in" data-aos-delay="200"><div class="bicon" style="background:rgba(245,158,11,.1);color:var(--gold)"><i class="fa-solid fa-hand-peace"></i></div><h4>Ease of Use</h4><p>No coding or IT degree needed. If you can use WhatsApp, you can use our systems.</p></div>
+      </div>
+    </div>
+    <div class="about-visual" data-aos="fade-left">
+      <div class="awrap"><div class="ainner">
+        <div style="font-family:var(--fh);font-size:.85rem;font-weight:700;color:rgba(255,255,255,.7);margin-bottom:.5rem">Business Health Score</div>
+        <div class="sbar"><div class="sbar-lbl"><span>Operations Efficiency</span><span>92%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="0.92"></div></div></div>
+        <div class="sbar"><div class="sbar-lbl"><span>Revenue Growth</span><span>78%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="0.78"></div></div></div>
+        <div class="sbar"><div class="sbar-lbl"><span>Customer Satisfaction</span><span>96%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="0.96"></div></div></div>
+        <div class="sbar"><div class="sbar-lbl"><span>Data Accuracy</span><span>99%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="0.99"></div></div></div>
+        <div class="acrow">
+          <div class="ac"><strong class="count" data-target="10">0</strong><span>Systems</span></div>
+          <div class="ac"><strong class="count" data-target="500">0</strong><span>Businesses</span></div>
+          <div class="ac"><strong class="count" data-target="98">0</strong><span>% Uptime</span></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section products" id="products">
+  <div class="container">
+    <div style="text-align:center" data-aos="fade-up">
+      <div class="stag"><i class="fa-solid fa-grid-2"></i> Our Solutions</div>
+      <h2 class="stitle">Industry-Specific Systems for Every Business</h2>
+      <p class="ssub" style="margin:0 auto">From hospitality to healthcare, logistics to laundry — we have a ready-made system for your industry.</p>
+    </div>
+    <div class="pgrid">
+      <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="picon" style="background:rgba(37,99,235,.1);color:var(--accent)"><i class="fa-solid fa-building"></i></div><h3>Shortlet Management System</h3><p>Manage bookings, tenant check-ins, payments, and room availability for your shortlet apartments — all in one place.</p><a class="pbtn wa-prod" data-p="Shortlet Management System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="50"><div class="picon" style="background:rgba(239,68,68,.1);color:#ef4444"><i class="fa-solid fa-heart-pulse"></i></div><h3>Clinic Management System</h3><p>Patient records, appointment scheduling, prescriptions, billing and lab results — simplified for small clinics and hospitals.</p><a class="pbtn wa-prod" data-p="Clinic Management System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="100"><div class="picon" style="background:rgba(16,185,129,.1);color:#10b981"><i class="fa-solid fa-store"></i></div><h3>Retail Store Dashboard</h3><p>Track sales, manage inventory, generate receipts, and monitor your retail store's performance in real time.</p><a class="pbtn wa-prod" data-p="Retail Store Dashboard" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="picon" style="background:rgba(245,158,11,.1);color:var(--gold)"><i class="fa-solid fa-utensils"></i></div><h3>Restaurant System</h3><p>Table management, menu management, order tracking, kitchen display, and sales reports for restaurants and cafes.</p><a class="pbtn wa-prod" data-p="Restaurant System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="50"><div class="picon" style="background:rgba(124,58,237,.1);color:#7c3aed"><i class="fa-solid fa-graduation-cap"></i></div><h3>School Management System</h3><p>Student records, attendance, grade management, fee collection, and parent communications — built for Nigerian schools.</p><a class="pbtn wa-prod" data-p="School Management System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="100"><div class="picon" style="background:rgba(6,182,212,.1);color:var(--teal)"><i class="fa-solid fa-truck"></i></div><h3>Logistics / Fleet System</h3><p>Fleet tracking, trip logging, driver management, fuel monitoring, and delivery order management for transport businesses.</p><a class="pbtn wa-prod" data-p="Logistics/Fleet System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="picon" style="background:rgba(99,102,241,.1);color:#6366f1"><i class="fa-solid fa-shirt"></i></div><h3>Laundry System</h3><p>Customer order intake, item tracking, pricing, delivery scheduling, and payment receipts for laundry businesses.</p><a class="pbtn wa-prod" data-p="Laundry System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="50"><div class="picon" style="background:rgba(236,72,153,.1);color:#ec4899"><i class="fa-solid fa-dumbbell"></i></div><h3>Gym Management System</h3><p>Member registration, subscription management, attendance tracking, trainer assignments, and renewal reminders.</p><a class="pbtn wa-prod" data-p="Gym Management System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="100"><div class="picon" style="background:rgba(251,146,60,.1);color:#fb923c"><i class="fa-solid fa-house-chimney"></i></div><h3>Real Estate System</h3><p>Property listings, tenant/buyer management, rent collection, maintenance logs, and lease tracking for agents and landlords.</p><a class="pbtn wa-prod" data-p="Real Estate System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+      <div class="pcard" data-aos="fade-up" data-aos-delay="0"><div class="picon" style="background:rgba(20,184,166,.1);color:#14b8a6"><i class="fa-solid fa-motorcycle"></i></div><h3>Delivery System</h3><p>Order dispatch, rider management, real-time status tracking, proof of delivery, and customer notification automation.</p><a class="pbtn wa-prod" data-p="Delivery System" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-right"></i> View Demo</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section features" id="features">
+  <div class="container">
+    <div style="text-align:center" data-aos="fade-up">
+      <div class="stag stag-d"><i class="fa-solid fa-sparkles"></i> Platform Features</div>
+      <h2 class="stitle stitle-w">Everything Your Business Needs to Thrive</h2>
+      <p class="ssub ssub-d" style="margin:0 auto">Each BPA Dynamics system is packed with powerful features designed for the Nigerian business environment.</p>
+    </div>
+    <div class="fgrid">
+      <div class="fcard" data-aos="fade-up" data-aos-delay="0"><div class="ficon"><i class="fa-solid fa-gauge-high"></i></div><h3>Real-time Dashboards</h3><p>Live KPIs, charts, and metrics that update automatically — always know where your business stands at a glance.</p></div>
+      <div class="fcard" data-aos="fade-up" data-aos-delay="60"><div class="ficon"><i class="fa-solid fa-users-gear"></i></div><h3>Role-Based Access</h3><p>Admin, manager, staff, and owner roles with different permissions. Control who sees and does what in your system.</p></div>
+      <div class="fcard" data-aos="fade-up" data-aos-delay="120"><div class="ficon"><i class="fa-brands fa-google"></i></div><h3>Cloud-Based (Google)</h3><p>Built on Google Apps Script — no server to maintain, no software to install. Works anywhere, from any device.</p></div>
+      <div class="fcard" data-aos="fade-up" data-aos-delay="0"><div class="ficon"><i class="fa-solid fa-mobile-screen-button"></i></div><h3>Mobile Friendly</h3><p>Fully responsive systems that work beautifully on phones, tablets, and desktops. Manage your business from anywhere.</p></div>
+      <div class="fcard" data-aos="fade-up" data-aos-delay="60"><div class="ficon"><i class="fa-solid fa-chart-bar"></i></div><h3>Analytics &amp; Reports</h3><p>Automated weekly/monthly reports, exportable data, trend analysis, and profit/loss summaries at the click of a button.</p></div>
+      <div class="fcard" data-aos="fade-up" data-aos-delay="120"><div class="ficon"><i class="fa-solid fa-bell"></i></div><h3>Smart Automation</h3><p>Automated email alerts, payment reminders, low-stock notifications, and summary reports — your business never sleeps.</p></div>
+    </div>
+    <div class="cstrip" data-aos="fade-up" data-aos-delay="100">
+      <div class="citem"><strong class="count" data-target="10">0</strong><span>Industry Systems</span></div>
+      <div class="citem"><strong class="count" data-target="500">0</strong><span>Businesses Powered</span></div>
+      <div class="citem"><strong class="count" data-target="99">0</strong><span>% System Uptime</span></div>
+      <div class="citem"><strong class="count" data-target="48">0</strong><span>Hours to Deploy</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DASHBOARD PREVIEW ===== -->
+<section class="section dashsec" id="dashboard">
+  <div class="container dash-inner">
+    <div data-aos="fade-right">
+      <div class="stag"><i class="fa-solid fa-desktop"></i> Live Preview</div>
+      <h2 class="stitle">Your Business,<br/>Visualized Beautifully</h2>
+      <p class="ssub">Every BPA Dynamics system includes a professional dashboard that gives you instant clarity on revenue, customers, inventory, and more.</p>
+      <ul style="margin-top:1.5rem;list-style:none;display:flex;flex-direction:column;gap:.75rem">
+        <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0"><i class="fa-solid fa-check"></i></span>Auto-updating KPI cards with trend indicators</li>
+        <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0"><i class="fa-solid fa-check"></i></span>Interactive charts for revenue, bookings, and performance</li>
+        <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0"><i class="fa-solid fa-check"></i></span>Recent activity logs and transaction tables</li>
+        <li style="display:flex;align-items:center;gap:.75rem;font-size:.9rem"><span style="width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0"><i class="fa-solid fa-check"></i></span>One-click export to Excel, PDF, and Google Sheets</li>
+      </ul>
+      <a id="dashBtn" href="#" class="btn btn-p" style="margin-top:2rem" target="_blank" rel="noopener"><i class="fa-solid fa-play"></i> Request Live Demo</a>
+    </div>
+    <div data-aos="fade-left">
+      <div class="dwin">
+        <div class="dwin-bar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span style="font-size:.7rem;color:rgba(255,255,255,.3);margin-left:.75rem">BPA Shortlet Dashboard</span></div>
+        <div class="dwin-body">
+          <div class="kpi-row">
+            <div class="kpi"><div class="kl">Total Revenue</div><div class="kv">₦2.4M</div><span class="kb kg">▲ 14%</span></div>
+            <div class="kpi"><div class="kl">Bookings</div><div class="kv">142</div><span class="kb kb2">This month</span></div>
+            <div class="kpi"><div class="kl">Occupancy</div><div class="kv">87%</div><span class="kb kam">3 vacant</span></div>
+          </div>
+          <div class="chart-row">
+            <div class="cbox"><div class="cl">Revenue – Last 6 Months</div><canvas id="dashBar"></canvas></div>
+            <div class="cbox"><div class="cl">Recent Bookings</div>
+              <table class="tmini"><thead><tr><th>Guest</th><th>Room</th><th>Status</th></tr></thead><tbody>
+                <tr><td>Amara O.</td><td>A1</td><td><span class="sdot sg"></span>Paid</td></tr>
+                <tr><td>Tunde M.</td><td>B3</td><td><span class="sdot sb"></span>Active</td></tr>
+                <tr><td>Ngozi E.</td><td>C2</td><td><span class="sdot sa"></span>Pending</td></tr>
+                <tr><td>James A.</td><td>A4</td><td><span class="sdot sg"></span>Paid</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section how" id="how">
+  <div class="container">
+    <div style="text-align:center" data-aos="fade-up">
+      <div class="stag"><i class="fa-solid fa-circle-nodes"></i> The Process</div>
+      <h2 class="stitle">Up &amp; Running in 48 Hours</h2>
+      <p class="ssub" style="margin:0 auto">We handle all the technical setup. You just log in and start running your business better.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-aos="fade-up" data-aos-delay="0"><div class="snum">1</div><h3>Choose Your System</h3><p>Tell us your industry and business size. We'll recommend the perfect BPA Dynamics system for your needs.</p></div>
+      <div class="step" data-aos="fade-up" data-aos-delay="80"><div class="snum">2</div><h3>We Set Everything Up</h3><p>Our team configures your system, customizes it with your business name, logo, and data — within 48 hours.</p></div>
+      <div class="step" data-aos="fade-up" data-aos-delay="160"><div class="snum">3</div><h3>Start Using Immediately</h3><p>Log in, add your team, and start recording transactions, managing customers, and tracking performance from day one.</p></div>
+      <div class="step" data-aos="fade-up" data-aos-delay="240"><div class="snum">4</div><h3>Grow with Insights</h3><p>Use your live dashboard and automated reports to make smarter decisions and scale your business with confidence.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div style="text-align:center" data-aos="fade-up">
+      <div class="stag"><i class="fa-solid fa-quote-left"></i> Client Stories</div>
+      <h2 class="stitle">Businesses That Trust BPA Dynamics</h2>
+      <p class="ssub" style="margin:0 auto">Real feedback from real entrepreneurs across Nigeria using our systems every day.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard" data-aos="fade-up" data-aos-delay="0"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="tq">"Since we started using the Shortlet Management System, our booking process is fully automated. No more WhatsApp chaos — everything is organized and our revenue is up 30%."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">AO</div><div><div class="tname">Amaka Obi</div><div class="trole">Shortlet Business Owner, Lagos</div></div></div></div>
+      <div class="tcard" data-aos="fade-up" data-aos-delay="80"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="tq">"The Restaurant System transformed how we run our kitchen. Orders are tracked, the team knows what to prepare, and I can see daily sales from my phone. Brilliant product."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">TA</div><div><div class="tname">Tunde Adewale</div><div class="trole">Restaurant Manager, Abuja</div></div></div></div>
+      <div class="tcard" data-aos="fade-up" data-aos-delay="160"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div><p class="tq">"Our school's admin process used to take hours. Now student records, fees, and attendance are all digital. Parents love the automatic fee reminders. Highly recommended."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#10b981,#06b6d4)">NE</div><div><div class="tname">Ngozi Eze</div><div class="trole">School Principal, Port Harcourt</div></div></div></div>
+      <div class="tcard" data-aos="fade-up" data-aos-delay="0"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="tq">"The Fleet System helped us cut fuel waste and track our vehicles properly. We now have proof for every delivery and our clients trust us more than ever."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#6366f1,#ec4899)">IB</div><div><div class="tname">Ibrahim Bello</div><div class="trole">Logistics CEO, Kano</div></div></div></div>
+      <div class="tcard" data-aos="fade-up" data-aos-delay="80"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="tq">"Setting up took less than two days. My retail store now has a proper inventory system. I know exactly what's selling, what's running low, and what profit I'm making daily."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#14b8a6,#2563eb)">CI</div><div><div class="tname">Chiamaka Ikenna</div><div class="trole">Retail Business Owner, Enugu</div></div></div></div>
+      <div class="tcard" data-aos="fade-up" data-aos-delay="160"><div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><p class="tq">"The Gym System is exactly what we needed. Member subscriptions are tracked automatically, and I get alerts before anyone's membership expires. Our renewals went up by 40%."</p><div class="tauthor"><div class="tav" style="background:linear-gradient(135deg,#ec4899,#f59e0b)">MO</div><div><div class="tname">Michael Ogundele</div><div class="trole">Gym Owner, Ibadan</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="section pricing" id="pricing">
+  <div class="container">
+    <div style="text-align:center" data-aos="fade-up">
+      <div class="stag"><i class="fa-solid fa-tag"></i> Pricing Plans</div>
+      <h2 class="stitle">Simple, Transparent Pricing</h2>
+      <p class="ssub" style="margin:0 auto">Choose the plan that fits your business. No hidden fees, no long-term lock-ins. Upgrade anytime as you grow.</p>
+    </div>
+    <div class="pr-grid">
+      <div class="pr-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="pr-plan">Basic</div>
+        <div class="pr-price"><span class="pr-cur">₦</span><span class="pr-amt" id="pBasic">25,000</span><span class="pr-per">/month</span></div>
+        <div class="pr-div"></div>
+        <ul class="pr-feats">
+          <li><i class="fa-solid fa-check-circle"></i> 1 Business System</li>
+          <li><i class="fa-solid fa-check-circle"></i> Up to 3 Staff Users</li>
+          <li><i class="fa-solid fa-check-circle"></i> Basic Dashboard</li>
+          <li><i class="fa-solid fa-check-circle"></i> Email Alerts</li>
+          <li><i class="fa-solid fa-check-circle"></i> Monthly Reports</li>
+          <li class="dis"><i class="fa-solid fa-times-circle"></i> Custom Branding</li>
+          <li class="dis"><i class="fa-solid fa-times-circle"></i> Priority Support</li>
+        </ul>
+        <a class="pr-btn out wa-plan" data-plan="Basic Plan" href="#" target="_blank" rel="noopener">Get Started</a>
+      </div>
+      <div class="pr-card feat" data-aos="fade-up" data-aos-delay="80">
+        <div class="pr-badge">Most Popular</div>
+        <div class="pr-plan">Business</div>
+        <div class="pr-price"><span class="pr-cur">₦</span><span class="pr-amt" id="pBiz">65,000</span><span class="pr-per">/month</span></div>
+        <div class="pr-div"></div>
+        <ul class="pr-feats">
+          <li><i class="fa-solid fa-check-circle"></i> Up to 3 Business Systems</li>
+          <li><i class="fa-solid fa-check-circle"></i> Up to 15 Staff Users</li>
+          <li><i class="fa-solid fa-check-circle"></i> Advanced Dashboard</li>
+          <li><i class="fa-solid fa-check-circle"></i> Email &amp; WhatsApp Alerts</li>
+          <li><i class="fa-solid fa-check-circle"></i> Weekly Auto-Reports</li>
+          <li><i class="fa-solid fa-check-circle"></i> Custom Branding</li>
+          <li><i class="fa-solid fa-check-circle"></i> Priority Support (24h)</li>
+        </ul>
+        <a class="pr-btn grd wa-plan" data-plan="Business Plan" href="#" target="_blank" rel="noopener">Get Started</a>
+      </div>
+      <div class="pr-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="pr-plan">Enterprise</div>
+        <div class="pr-price"><span class="pr-cur"></span><span class="pr-amt" style="font-size:2rem">Custom</span></div>
+        <div class="pr-div"></div>
+        <ul class="pr-feats">
+          <li><i class="fa-solid fa-check-circle"></i> Unlimited Systems</li>
+          <li><i class="fa-solid fa-check-circle"></i> Unlimited Staff Users</li>
+          <li><i class="fa-solid fa-check-circle"></i> Full Custom Dashboard</li>
+          <li><i class="fa-solid fa-check-circle"></i> API &amp; Integration Access</li>
+          <li><i class="fa-solid fa-check-circle"></i> Daily Auto-Reports</li>
+          <li><i class="fa-solid fa-check-circle"></i> White-Label Branding</li>
+          <li><i class="fa-solid fa-check-circle"></i> Dedicated Account Manager</li>
+        </ul>
+        <a class="pr-btn sol wa-plan" data-plan="Enterprise Plan" href="#" target="_blank" rel="noopener">Contact Us</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:2rem;font-size:.85rem;color:var(--muted)"><i class="fa-solid fa-shield-halved" style="color:var(--accent)"></i> All plans include a <strong>7-day free trial</strong>. No credit card required.</p>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact" id="contact">
+  <div class="container con-inner">
+    <div data-aos="fade-right">
+      <div class="stag stag-d"><i class="fa-solid fa-envelope"></i> Get In Touch</div>
+      <h2 class="stitle stitle-w">Let's Automate Your Business Together</h2>
+      <p style="color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.65;max-width:420px;margin-bottom:1.75rem">Ready to digitize your operations? Drop us a message or reach out directly on WhatsApp — we respond within the hour.</p>
+      <div class="cinfo">
+        <div class="citem"><div class="ciicon"><i class="fa-solid fa-envelope"></i></div><div><span>Email</span><strong id="cEmail"></strong></div></div>
+        <div class="citem"><div class="ciicon"><i class="fa-brands fa-whatsapp"></i></div><div><span>WhatsApp</span><strong id="cWa"></strong></div></div>
+        <div class="citem"><div class="ciicon"><i class="fa-solid fa-location-dot"></i></div><div><span>Location</span><strong id="cLoc"></strong></div></div>
+      </div>
+      <a id="waMainBtn" href="#" class="wa-btn" style="margin-top:1.5rem" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem"></i> Chat on WhatsApp</a>
+    </div>
+    <div data-aos="fade-left">
+      <div class="cform-wrap">
+        <h3 style="font-family:var(--fh);font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:1.5rem">Request a Free Demo</h3>
+        <div class="cerr" id="fErr">Something went wrong. Please try again or reach us on WhatsApp.</div>
+        <form id="cForm" method="POST">
+          <div class="crow">
+            <div class="cgroup"><label>Full Name *</label><input type="text" name="name" placeholder="Your full name" required /></div>
+            <div class="cgroup"><label>Phone / WhatsApp *</label><input type="tel" name="phone" placeholder="+234 xxx xxxx xxx" required /></div>
+          </div>
+          <div class="cgroup"><label>Email Address *</label><input type="email" name="email" placeholder="you@yourbusiness.com" required /></div>
+          <div class="cgroup">
+            <label>Which system are you interested in?</label>
+            <select name="product">
+              <option value="">— Select a product —</option>
+              <option>Shortlet Management System</option>
+              <option>Clinic Management System</option>
+              <option>Retail Store Dashboard</option>
+              <option>Restaurant System</option>
+              <option>School Management System</option>
+              <option>Logistics / Fleet System</option>
+              <option>Laundry System</option>
+              <option>Gym Management System</option>
+              <option>Real Estate System</option>
+              <option>Delivery System</option>
+              <option>Multiple Systems</option>
+            </select>
+          </div>
+          <div class="cgroup"><label>Message</label><textarea name="message" placeholder="Tell us a little about your business..."></textarea></div>
+          <!-- Honeypot (anti-spam, hidden) -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <button type="submit" class="csub" id="fBtn"><i class="fa-solid fa-paper-plane"></i> Send Request</button>
+        </form>
+        <div class="csuccess" id="fSuccess">
+          <i class="fa-solid fa-circle-check"></i>
+          <strong style="display:block;color:#fff;font-size:1.1rem;margin-bottom:.5rem">Message Sent! 🎉</strong>
+          <p>Thank you! We'll contact you within the hour on WhatsApp or email.</p>
+          <a id="waSucBtn" href="#" class="wa-btn" style="margin-top:1.25rem;display:inline-flex" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Chat with us now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="finner">
+      <div class="fbrand">
+        <a href="#home" class="logo" style="font-size:1.15rem"><div class="logo-icon"><i class="fa-solid fa-bolt"></i></div><span>BPA <em>Dynamics</em></span></a>
+        <p>Empowering Nigerian businesses with intelligent automation systems. Cloud-based, affordable, and built for the way you work.</p>
+        <div class="socials" style="margin-top:1rem">
+          <a id="fTw" href="#" class="soc" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+          <a id="fLi" href="#" class="soc" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a id="fIg" href="#" class="soc" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+          <a id="fFb" href="#" class="soc" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+          <a id="fWa" href="#" class="soc" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="fcol"><h4>Products</h4><ul class="flinks"><li><a href="#products">Shortlet System</a></li><li><a href="#products">Clinic System</a></li><li><a href="#products">Restaurant System</a></li><li><a href="#products">School System</a></li><li><a href="#products">Logistics System</a></li><li><a href="#products">Real Estate System</a></li></ul></div>
+      <div class="fcol"><h4>Company</h4><ul class="flinks"><li><a href="#about">About Us</a></li><li><a href="#how">How It Works</a></li><li><a href="#testimonials">Success Stories</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="fcol"><h4>Support</h4><ul class="flinks"><li><a id="fEmail" href="#">Email Support</a></li><li><a id="fWaLink" href="#" target="_blank" rel="noopener">WhatsApp Support</a></li><li><a href="#">Training Videos</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <p>© 2025 BPA Dynamics – Business Automation Solutions. All rights reserved. Made with ❤️ in Nigeria.</p>
+      <div class="socials">
+        <a id="fbTw" href="#" class="soc" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        <a id="fbLi" href="#" class="soc" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a id="fbWa" href="#" class="soc" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-chevron-up"></i></button>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+/* ===============================================================
+   1. WIRE UP ALL DYNAMIC LINKS FROM BPA CONFIG OBJECT
+   =============================================================== */
+(function(){
+  var wa  = BPA.whatsapp;
+  function waUrl(msg){ return 'https://wa.me/'+wa+'?text='+encodeURIComponent(msg); }
+  var gen = waUrl('Hi BPA Dynamics! I\'d like to get a demo of your business management systems. Please get in touch.');
+
+  // Hero & dashboard demo buttons
+  document.getElementById('heroDemoBtn').href = gen;
+  document.getElementById('dashBtn').href     = waUrl('Hi BPA Dynamics! I saw your dashboard demo and I\'m interested. Please contact me.');
+
+  // Product "View Demo" buttons — each sends a product-specific message
+  document.querySelectorAll('.wa-prod').forEach(function(el){
+    var p = el.getAttribute('data-p');
+    el.href = waUrl('Hi BPA Dynamics! I\'m interested in a demo of your '+p+'. Please contact me.');
+  });
+
+  // Pricing "Get Started" buttons — plan-specific message
+  document.querySelectorAll('.wa-plan').forEach(function(el){
+    var pl = el.getAttribute('data-plan');
+    el.href = waUrl('Hi BPA Dynamics! I\'d like to sign up for the '+pl+'. Please send me details and pricing.');
+  });
+
+  // Contact section text & buttons
+  document.getElementById('cEmail').textContent = BPA.email;
+  document.getElementById('cWa').textContent    = '+'+wa;
+  document.getElementById('cLoc').textContent   = BPA.location;
+  document.getElementById('waMainBtn').href     = waUrl('Hi BPA Dynamics! I\'d like to learn more about your systems.');
+  document.getElementById('waSucBtn').href      = waUrl('Hi! I just submitted a demo request on your website. Looking forward to hearing from you!');
+
+  // Footer social icons
+  document.getElementById('fTw').href    = BPA.twitter;
+  document.getElementById('fLi').href   = BPA.linkedin;
+  document.getElementById('fIg').href   = BPA.instagram;
+  document.getElementById('fFb').href   = BPA.facebook;
+  document.getElementById('fWa').href   = waUrl('Hi BPA Dynamics!');
+  document.getElementById('fbTw').href  = BPA.twitter;
+  document.getElementById('fbLi').href  = BPA.linkedin;
+  document.getElementById('fbWa').href  = waUrl('Hi BPA Dynamics!');
+
+  // Footer support links
+  document.getElementById('fEmail').href  = 'mailto:'+BPA.email;
+  document.getElementById('fWaLink').href = waUrl('Hi BPA Dynamics! I need support.');
+
+  // Pricing display
+  document.getElementById('pBasic').textContent = BPA.priceBasic;
+  document.getElementById('pBiz').textContent   = BPA.priceBusiness;
+
+  // Set Formspree action on form
+  document.getElementById('cForm').action = BPA.formspree;
+})();
+
+/* ===============================================================
+   2. CONTACT FORM — FORMSPREE ASYNC SUBMIT
+   =============================================================== */
+document.getElementById('cForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var form = this;
+  var btn  = document.getElementById('fBtn');
+  var err  = document.getElementById('fErr');
+  var suc  = document.getElementById('fSuccess');
+
+  err.style.display = 'none';
+
+  // Basic validation
+  var name  = form.querySelector('[name="name"]').value.trim();
+  var phone = form.querySelector('[name="phone"]').value.trim();
+  var email = form.querySelector('[name="email"]').value.trim();
+  if(!name || !phone || !email){
+    err.textContent = 'Please fill in your name, phone, and email before submitting.';
+    err.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+  try{
+    var res = await fetch(form.action, {
+      method:'POST', body: new FormData(form),
+      headers:{'Accept':'application/json'}
+    });
+    if(res.ok){
+      form.style.transition = 'opacity .4s';
+      form.style.opacity = '0';
+      setTimeout(function(){
+        form.style.display = 'none';
+        suc.style.display = 'block';
+      }, 400);
+    } else { throw new Error('fail'); }
+  } catch(_){
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Request';
+    err.textContent = 'Something went wrong. Please try WhatsApp instead.';
+    err.style.display = 'block';
+  }
+});
+
+/* ===============================================================
+   3. AOS INIT
+   =============================================================== */
+AOS.init({ duration:700, once:true, offset:60, easing:'ease-out-cubic' });
+
+/* ===============================================================
+   4. NAV SCROLL + BACK TO TOP
+   =============================================================== */
+var nav = document.getElementById('mainNav');
+var btt = document.getElementById('btt');
+window.addEventListener('scroll', function(){
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+  btt.classList.toggle('show', window.scrollY > 400);
+});
+
+/* ===============================================================
+   5. HAMBURGER MENU
+   =============================================================== */
+var ham = document.getElementById('ham');
+var mob = document.getElementById('mobMenu');
+ham.addEventListener('click', function(){ ham.classList.toggle('open'); mob.classList.toggle('open'); });
+function cMenu(){ ham.classList.remove('open'); mob.classList.remove('open'); }
+document.addEventListener('click', function(e){
+  if(mob.classList.contains('open') && !mob.contains(e.target) && !ham.contains(e.target)) cMenu();
+});
+
+/* ===============================================================
+   6. ANIMATED COUNTERS
+   =============================================================== */
+var countersRan = false;
+function runCounters(){
+  if(countersRan) return; countersRan = true;
+  document.querySelectorAll('.count[data-target]').forEach(function(el){
+    var target = +el.dataset.target, start = performance.now(), dur = 1800;
+    (function tick(now){
+      var p = Math.min((now-start)/dur, 1), eased = 1-Math.pow(1-p,3);
+      el.textContent = Math.floor(eased*target);
+      if(p<1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    })(start);
+  });
+}
+
+/* ===============================================================
+   7. ANIMATED PROGRESS BARS
+   =============================================================== */
+var barsRan = false;
+function runBars(){
+  if(barsRan) return; barsRan = true;
+  document.querySelectorAll('.sbar-fill').forEach(function(bar){
+    var w = parseFloat(bar.getAttribute('data-w')||1);
+    bar.style.transition = 'transform 1.2s cubic-bezier(.34,1.2,.64,1)';
+    bar.style.transform  = 'scaleX('+w+')';
+  });
+}
+
+/* Intersection observer */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    if(e.target.id==='counterTrigger') runCounters();
+    if(e.target.id==='barTrigger')     runBars();
+  });
+},{ threshold:0.3 });
+
+var cs  = document.querySelector('.cstrip');
+var bw  = document.querySelector('.awrap');
+var acr = document.querySelector('.acrow');
+if(cs){  cs.id='counterTrigger'; io.observe(cs); }
+if(bw){  bw.id='barTrigger';     io.observe(bw); }
+if(acr){ acr.id='counterTrigger2';
+  var io2 = new IntersectionObserver(function(ent){ ent.forEach(function(e){ if(e.isIntersecting) runCounters(); }); },{threshold:0.3});
+  io2.observe(acr);
+}
+
+/* ===============================================================
+   8. CHARTS
+   =============================================================== */
+Chart.defaults.font.family = "'DM Sans',sans-serif";
+
+// Hero line chart
+var hLine = document.getElementById('hLine');
+if(hLine){
+  Chart.defaults.color = 'rgba(255,255,255,.5)';
+  Chart.defaults.borderColor = 'rgba(255,255,255,.06)';
+  new Chart(hLine,{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{data:[2.1,2.8,3.2,2.9,3.8,4.2],borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.15)',borderWidth:2,pointRadius:2,fill:true,tension:.4}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{display:false},y:{display:false}}}});
+}
+
+// Hero doughnut
+var hDough = document.getElementById('hDough');
+if(hDough){
+  new Chart(hDough,{type:'doughnut',data:{labels:['Bookings','Services','Products'],datasets:[{data:[55,28,17],backgroundColor:['#3b82f6','#7c3aed','#06b6d4'],borderWidth:0,hoverOffset:4}]},options:{responsive:true,maintainAspectRatio:true,cutout:'65%',plugins:{legend:{display:false}}}});
+}
+
+// Dashboard bar chart
+var dBar = document.getElementById('dashBar');
+if(dBar){
+  Chart.defaults.color = '#64748b';
+  Chart.defaults.borderColor = 'rgba(100,116,139,.1)';
+  new Chart(dBar,{type:'bar',data:{labels:['Nov','Dec','Jan','Feb','Mar','Apr'],datasets:[{data:[1.2,1.8,1.5,2.1,1.9,2.4],backgroundColor:function(ctx){var g=ctx.chart.ctx.createLinearGradient(0,0,0,100);g.addColorStop(0,'rgba(37,99,235,.8)');g.addColorStop(1,'rgba(124,58,237,.4)');return g;},borderRadius:4,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{display:false}}}});
+}
+
+/* ===============================================================
+   9. SMOOTH ANCHOR SCROLLING
+   =============================================================== */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var h = a.getAttribute('href');
+    if(h==='#') return;
+    var t = document.querySelector(h);
+    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }
+  });
+});
+</script>
+</body>
+</html>
